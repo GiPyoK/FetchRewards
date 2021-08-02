@@ -26,6 +26,9 @@ class SeatGeekTableViewCell: UITableViewCell {
         
         if let imageURL = URL(string: event.performers[0].image) {
             thumbnail.load(url: imageURL)
+            thumbnail.contentMode = .scaleAspectFill
+            thumbnail.layer.cornerRadius = 16
+            thumbnail.clipsToBounds = true
         }
         
         title.text = event.shortTitle
