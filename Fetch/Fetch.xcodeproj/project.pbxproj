@@ -15,6 +15,8 @@
 		A64E772626AF3DB5007A9F48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64E772426AF3DB5007A9F48 /* LaunchScreen.storyboard */; };
 		A64E772E26B0C345007A9F48 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E772D26B0C345007A9F48 /* Event.swift */; };
 		A64E773426B3B853007A9F48 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773326B3B853007A9F48 /* EventController.swift */; };
+		A64E773626B79A35007A9F48 /* SeatGeekSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773526B79A35007A9F48 /* SeatGeekSearchTableViewController.swift */; };
+		A64E773826B79FC0007A9F48 /* SeatGeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773726B79FC0007A9F48 /* SeatGeekTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		A64E772726AF3DB5007A9F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A64E772D26B0C345007A9F48 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A64E773326B3B853007A9F48 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
+		A64E773526B79A35007A9F48 /* SeatGeekSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatGeekSearchTableViewController.swift; sourceTree = "<group>"; };
+		A64E773726B79FC0007A9F48 /* SeatGeekTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatGeekTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				A64E773326B3B853007A9F48 /* EventController.swift */,
+				A64E773526B79A35007A9F48 /* SeatGeekSearchTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -101,6 +106,7 @@
 		A64E773226B3B826007A9F48 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A64E773726B79FC0007A9F48 /* SeatGeekTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,7 +185,9 @@
 				A64E771A26AF3DB3007A9F48 /* AppDelegate.swift in Sources */,
 				A64E773426B3B853007A9F48 /* EventController.swift in Sources */,
 				A64E772E26B0C345007A9F48 /* Event.swift in Sources */,
+				A64E773626B79A35007A9F48 /* SeatGeekSearchTableViewController.swift in Sources */,
 				A64E771C26AF3DB3007A9F48 /* SceneDelegate.swift in Sources */,
+				A64E773826B79FC0007A9F48 /* SeatGeekTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +264,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -311,7 +319,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
