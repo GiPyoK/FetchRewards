@@ -17,6 +17,7 @@
 		A64E773426B3B853007A9F48 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773326B3B853007A9F48 /* EventController.swift */; };
 		A64E773626B79A35007A9F48 /* SeatGeekSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773526B79A35007A9F48 /* SeatGeekSearchTableViewController.swift */; };
 		A64E773826B79FC0007A9F48 /* SeatGeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773726B79FC0007A9F48 /* SeatGeekTableViewCell.swift */; };
+		A64E773C26B7CF3B007A9F48 /* SeatGeekDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773B26B7CF3B007A9F48 /* SeatGeekDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		A64E773326B3B853007A9F48 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
 		A64E773526B79A35007A9F48 /* SeatGeekSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatGeekSearchTableViewController.swift; sourceTree = "<group>"; };
 		A64E773726B79FC0007A9F48 /* SeatGeekTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatGeekTableViewCell.swift; sourceTree = "<group>"; };
+		A64E773B26B7CF3B007A9F48 /* SeatGeekDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatGeekDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +72,8 @@
 				A64E772226AF3DB5007A9F48 /* Assets.xcassets */,
 				A64E772726AF3DB5007A9F48 /* Info.plist */,
 				A64E772F26B0C6E0007A9F48 /* Models */,
-				A64E773126B3B7D8007A9F48 /* Controllers */,
+				A64E773126B3B7D8007A9F48 /* Model Controllers */,
+				A64E773D26B7CF46007A9F48 /* View Controllers */,
 				A64E773226B3B826007A9F48 /* Views */,
 				A64E773026B3B7C0007A9F48 /* Storyboards */,
 			);
@@ -94,13 +97,12 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		A64E773126B3B7D8007A9F48 /* Controllers */ = {
+		A64E773126B3B7D8007A9F48 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				A64E773326B3B853007A9F48 /* EventController.swift */,
-				A64E773526B79A35007A9F48 /* SeatGeekSearchTableViewController.swift */,
 			);
-			path = Controllers;
+			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
 		A64E773226B3B826007A9F48 /* Views */ = {
@@ -109,6 +111,15 @@
 				A64E773726B79FC0007A9F48 /* SeatGeekTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A64E773D26B7CF46007A9F48 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A64E773526B79A35007A9F48 /* SeatGeekSearchTableViewController.swift */,
+				A64E773B26B7CF3B007A9F48 /* SeatGeekDetailViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A64E773C26B7CF3B007A9F48 /* SeatGeekDetailViewController.swift in Sources */,
 				A64E771E26AF3DB3007A9F48 /* ViewController.swift in Sources */,
 				A64E771A26AF3DB3007A9F48 /* AppDelegate.swift in Sources */,
 				A64E773426B3B853007A9F48 /* EventController.swift in Sources */,
@@ -264,7 +276,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -319,7 +331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

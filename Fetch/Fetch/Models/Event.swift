@@ -37,18 +37,14 @@ struct Venue: Codable {
     let id: Int
     let name: String
     let address: String
-    let city: String
-    let state: String
-    let postalCode: String
+    let extendedAddress: String
     let displayLocation: String
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
         case address = "address"
-        case city = "city"
-        case state = "state"
-        case postalCode = "postal_code"
+        case extendedAddress = "extended_address"
         case displayLocation = "display_location"
     }
 }
