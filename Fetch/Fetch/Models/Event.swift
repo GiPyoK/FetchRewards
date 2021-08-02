@@ -20,7 +20,6 @@ struct Event: Codable {
     
     let venue: Venue
     let performers: [Performer]
-    let stats: Stats
     
     enum CodingKeys: String, CodingKey {
         case type = "type"
@@ -31,12 +30,11 @@ struct Event: Codable {
         
         case venue = "venue"
         case performers = "performers"
-        case stats = "stats"
     }
 }
 
 struct Venue: Codable {
-    let id: String
+    let id: Int
     let name: String
     let address: String
     let city: String
@@ -62,15 +60,5 @@ struct Performer: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case image = "image"
-    }
-}
-
-struct Stats: Codable {
-    let lowestPrice: Int
-    let highestPrice: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case lowestPrice = "lowest_price"
-        case highestPrice = "highest_price"
     }
 }
