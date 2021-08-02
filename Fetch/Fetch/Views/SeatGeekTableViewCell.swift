@@ -34,21 +34,9 @@ class SeatGeekTableViewCell: UITableViewCell {
         title.text = event.shortTitle
         type.text = event.type
         location.text = event.venue.displayLocation
-        time.text = event.datetimeLocal
+        time.text = Helper.formatDate(date: event.datetimeLocal) ?? event.datetimeLocal
     }
 
 }
 
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
-}
+

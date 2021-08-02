@@ -18,6 +18,7 @@
 		A64E773626B79A35007A9F48 /* SeatGeekSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773526B79A35007A9F48 /* SeatGeekSearchTableViewController.swift */; };
 		A64E773826B79FC0007A9F48 /* SeatGeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773726B79FC0007A9F48 /* SeatGeekTableViewCell.swift */; };
 		A64E773C26B7CF3B007A9F48 /* SeatGeekDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773B26B7CF3B007A9F48 /* SeatGeekDetailViewController.swift */; };
+		A64E773F26B89E80007A9F48 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E773E26B89E80007A9F48 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		A64E773526B79A35007A9F48 /* SeatGeekSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatGeekSearchTableViewController.swift; sourceTree = "<group>"; };
 		A64E773726B79FC0007A9F48 /* SeatGeekTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatGeekTableViewCell.swift; sourceTree = "<group>"; };
 		A64E773B26B7CF3B007A9F48 /* SeatGeekDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatGeekDetailViewController.swift; sourceTree = "<group>"; };
+		A64E773E26B89E80007A9F48 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				A64E773D26B7CF46007A9F48 /* View Controllers */,
 				A64E773226B3B826007A9F48 /* Views */,
 				A64E773026B3B7C0007A9F48 /* Storyboards */,
+				A64E773E26B89E80007A9F48 /* Helpers.swift */,
 			);
 			path = Fetch;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				A64E771E26AF3DB3007A9F48 /* ViewController.swift in Sources */,
 				A64E771A26AF3DB3007A9F48 /* AppDelegate.swift in Sources */,
 				A64E773426B3B853007A9F48 /* EventController.swift in Sources */,
+				A64E773F26B89E80007A9F48 /* Helpers.swift in Sources */,
 				A64E772E26B0C345007A9F48 /* Event.swift in Sources */,
 				A64E773626B79A35007A9F48 /* SeatGeekSearchTableViewController.swift in Sources */,
 				A64E771C26AF3DB3007A9F48 /* SceneDelegate.swift in Sources */,
