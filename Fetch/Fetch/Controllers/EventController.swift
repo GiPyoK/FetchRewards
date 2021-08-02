@@ -52,8 +52,22 @@ class EventController {
                 }
             }
             
-            // TODO: Decode the data
+            // Decode the data
+            guard let data = data else {
+                NSLog("EventController::performEventSearch: No data returned from \(searchQuery)")
+                completion(NSError())
+                return
+            }
             
+            let decoder = JSONDecoder()
+            do {
+                let searchResult = try decoder.decode(Events.self, from: data)
+                self.events = searchResult.events
+                completion(nil)
+            } catch {
+                NSLog("EventController::performEventSearch: Error decoding \(searchQuery) search: \(error)")
+                completion(error)
+            }
         }
         dataTask.resume()
     }
