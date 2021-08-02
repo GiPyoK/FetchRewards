@@ -16,16 +16,49 @@ class SeatGeekDetailViewController: UIViewController {
     @IBOutlet weak var favoriteBarButton: UIBarButtonItem!
     
     var eventController: EventController?
-    var event: Event?
+    var event: Event? {
+        didSet {
+            updateViews()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateViews()
         // Do any additional setup after loading the view.
+    }
+    
+    private func updateViews() {
+        guard let event = event, isViewLoaded else { return }
+        
+        // image slide show
+        
+        // navigation bar title
+        let titleLabel = UILabel()
+        titleLabel.backgroundColor = .clear
+        titleLabel.numberOfLines = 3
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.textColor = .black
+        titleLabel.text = event.shortTitle
+        self.navigationItem.titleView = titleLabel
+        
+        // date time
+        timeLabel.text = Helper.formatDate(date: event.datetimeLocal) ?? event.datetimeLocal
+        
+        // venue name
+        venueNameLabel.text = event.venue.name
+        
+        // address
+        let address = event.venue.address + "\n" + event.venue.extendedAddress
+        addressLabel.text = address
     }
     
     @IBAction func favoriteBarButtonTabbed(_ sender: Any) {
     }
+    
+    
     
     /*
     // MARK: - Navigation
