@@ -80,15 +80,20 @@ class SeatGeekSearchTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "DetailViewSegue" {
+            if let seatGeekDetailVC = segue.destination as? SeatGeekDetailViewController,
+               let indexPath = tableView.indexPathForSelectedRow {
+                seatGeekDetailVC.eventController = eventController
+                seatGeekDetailVC.event = eventController.events[indexPath.row]
+            }
+        }
     }
-    */
+    
 
 }
 
@@ -110,10 +115,23 @@ extension SeatGeekSearchTableViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing (_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text else { return }
         
         eventController.performEventSearch(with: searchTerm) { error in
+            if let error = error {
+                NSLog(error.localizedDescription)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        eventController.performEventSearch(with: searchText) { error in
             if let error = error {
                 NSLog(error.localizedDescription)
                 return
