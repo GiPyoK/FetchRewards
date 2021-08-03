@@ -9,9 +9,15 @@ import Foundation
 
 class EventController {
     
-    var events: [Event] = []
+    var events: [[Event]] = [[Event](), [Event]()]
+    var unFavEvents: [Event] = []
     var favEvents: [Event] = []
-    var favorites: [String: Int] = [:]
+    var favorites: [String: Int] = [:] {
+        didSet {
+            UserDefaults.standard.setValue(favorites, forKey: "favorites")
+            print("UserDefaults set")
+        }
+    }
     
     // http://platform.seatgeek.com/#ios-hooks
     let baseURL = URL(string: "https://api.seatgeek.com/2")!
@@ -21,12 +27,33 @@ class EventController {
         // get favorited event id's
         if let favoritesDefault = UserDefaults.standard.dictionary(forKey: "favorites") as? [String: Int] {
             favorites = favoritesDefault
-            getFavoriteEvents(with: favorites) { error in
-                if let error = error {
-                    NSLog(error.localizedDescription)
-                    return
-                }
-            }
+        }
+        
+        updateEvents()
+    }
+    
+    private func updateEvents() {
+        events[0] = favEvents
+        events[1] = unFavEvents
+    }
+    
+    func updateFavoriteEvent(indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            // remove from favEvents and add to unFavEvents
+            var unFavEvent = events[0].remove(at: indexPath.row)
+            unFavEvent.favorited = false
+            events[1].insert(unFavEvent, at: 0)
+            
+            // update favorites dictionary
+            favorites.removeValue(forKey: "\(unFavEvent.id)")
+        } else {
+            // remove from unFavEvents and add to favEvents
+            var favEvent = events[1].remove(at: indexPath.row)
+            favEvent.favorited = true
+            events[0].append(favEvent)
+            
+            // update favorites dictionary
+            favorites["\(favEvent.id)"] = favEvent.id
         }
     }
     
@@ -76,8 +103,16 @@ class EventController {
             
             let decoder = JSONDecoder()
             do {
-                let searchResult = try decoder.decode(Events.self, from: data)
-                self.events = searchResult.events
+                var searchResult = try decoder.decode(Events.self, from: data)
+                for index in 0..<searchResult.events.count {
+                    let event = searchResult.events[index]
+                    if self.favorites["\(event.id)"] != nil {
+                        searchResult.events[index].favorited = true
+                    }
+                }
+                self.unFavEvents = searchResult.events.filter { $0.favorited == false }
+                self.favEvents = searchResult.events.filter {$0.favorited == true }
+                self.updateEvents()
                 completion(nil)
             } catch {
                 NSLog("EventController::performEventSearch: Error decoding \(searchQuery) search: \(error)")
@@ -88,9 +123,9 @@ class EventController {
     }
     
     /// Perform event search with favorite event id's
-    func getFavoriteEvents (with idDict: [String: Int], completion: @escaping(Error?) -> Void) {
+    func getFavoriteEvents (completion: @escaping(Error?) -> Void) {
         
-        let idString = idDict.map { $0.key }.joined(separator: ",")
+        let idString = self.favorites.map { $0.key }.joined(separator: ",")
         
         // Build the URL
         let searchURL = baseURL.appendingPathComponent("events")
@@ -135,8 +170,12 @@ class EventController {
             
             let decoder = JSONDecoder()
             do {
-                let searchResult = try decoder.decode(Events.self, from: data)
+                var searchResult = try decoder.decode(Events.self, from: data)
+                for index in 0..<searchResult.events.count {
+                    searchResult.events[index].favorited = true
+                }
                 self.favEvents = searchResult.events
+                self.updateEvents()
                 completion(nil)
             } catch {
                 NSLog("EventController::getFavoriteEvents: Error decoding favorite events, \(error)")
