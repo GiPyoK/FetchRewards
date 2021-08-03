@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import ImageSlideshow
+import AlamofireImage
 
 class SeatGeekDetailViewController: UIViewController {
 
-    @IBOutlet weak var detailImageView: UIImageView!
+
+    
+    @IBOutlet weak var imageSlideShowView: ImageSlideshow!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var venueNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
@@ -32,6 +36,7 @@ class SeatGeekDetailViewController: UIViewController {
     }
     
     var didFavoriteChange = false
+    let slideShow = ImageSlideshow()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +62,24 @@ class SeatGeekDetailViewController: UIViewController {
               isViewLoaded else { return }
         
         // image slide show
+        var imageSources = [InputSource]()
+        for performer in event.performers {
+            if let imageURL = URL(string: performer.image) {
+                imageSources.append(AlamofireSource(url: imageURL))
+            }
+        }
+        
+        imageSlideShowView.slideshowInterval = 2.5
+        imageSlideShowView.pageIndicatorPosition = .init(horizontal: .center, vertical: .bottom)
+        imageSlideShowView.contentScaleMode = UIViewContentMode.scaleAspectFill
+
+        let pageIndicator = UIPageControl()
+        pageIndicator.currentPageIndicatorTintColor = UIColor.lightGray
+        pageIndicator.pageIndicatorTintColor = UIColor.black
+        slideShow.pageIndicator = pageIndicator
+
+        imageSlideShowView.activityIndicator = DefaultActivityIndicator()
+        imageSlideShowView.setImageInputs(imageSources)
         
         // navigation bar title
         let titleLabel = UILabel()

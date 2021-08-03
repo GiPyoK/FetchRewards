@@ -26,8 +26,8 @@ class SeatGeekSearchTableViewController: UITableViewController {
         
         if eventController.events[0].count == 0 && eventController.events[1].count == 0 {
             eventController.getFavoriteEvents { error in
-                if let error = error {
-                    NSLog(error.localizedDescription)
+                if error != nil {
+//                    NSLog(error.localizedDescription)
                     return
                 }
                 

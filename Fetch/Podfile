@@ -7,5 +7,7 @@ target 'Fetch' do
 
   # Pods for Fetch
 pod 'ImageSlideshow', '~> 1.9.0'
+pod "ImageSlideshow/Alamofire"
+
 
 end
