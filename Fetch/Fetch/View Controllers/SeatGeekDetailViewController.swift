@@ -15,21 +15,46 @@ class SeatGeekDetailViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var favoriteBarButton: UIBarButtonItem!
     
-    var eventController: EventController?
+    var eventController: EventController? {
+        didSet {
+            updateViews()
+        }
+    }
+    var indexPath: IndexPath? {
+        didSet {
+            updateViews()
+        }
+    }
     var event: Event? {
         didSet {
             updateViews()
         }
     }
     
+    var didFavoriteChange = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         updateViews()
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if didFavoriteChange {
+            guard let eventController = eventController,
+                  let indexPath = indexPath else { return }
+            
+            eventController.updateFavoriteEvent(indexPath: indexPath)
+        }
     }
     
     private func updateViews() {
-        guard let event = event, isViewLoaded else { return }
+        guard let event = event,
+              let eventController = eventController,
+              let indexPath = indexPath,
+              isViewLoaded else { return }
         
         // image slide show
         
@@ -53,21 +78,33 @@ class SeatGeekDetailViewController: UIViewController {
         // address
         let address = event.venue.address + "\n" + event.venue.extendedAddress
         addressLabel.text = address
+        
+        // favorite button
+        favoriteBarButton.image = eventController.events[indexPath.section][indexPath.row].favorited ? UIImage(named: "star_fill.png") : UIImage(named: "star.png")
     }
     
     @IBAction func favoriteBarButtonTabbed(_ sender: Any) {
+        guard let event = event,
+              let eventController = eventController else { return }
+        
+        if event.favorited {
+            // Remove the favorited id from the dictionary
+            eventController.favorites.removeValue(forKey: "\(event.id)")
+            toggleFavoriteButton()
+        } else {
+            // Add the favorited id to the dictionary
+            eventController.favorites["\(event.id)"] = event.id
+            toggleFavoriteButton()
+        }
     }
     
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func toggleFavoriteButton() {
+        guard let eventController = eventController,
+              let indexPath = indexPath  else { return }
+        
+        eventController.events[indexPath.section][indexPath.row].favorited.toggle()
+        favoriteBarButton.image = eventController.events[indexPath.section][indexPath.row].favorited ? UIImage(named: "star_fill.png") : UIImage(named: "star.png")
+        didFavoriteChange.toggle()
     }
-    */
 
 }
