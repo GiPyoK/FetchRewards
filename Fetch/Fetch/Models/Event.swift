@@ -8,7 +8,7 @@
 import Foundation
 
 struct Events: Codable {
-    let events: [Event]
+    var events: [Event]
 }
 
 struct Event: Codable {
@@ -17,6 +17,7 @@ struct Event: Codable {
     let datetimeLocal: String
     let shortTitle: String
     let url: String
+    var favorited: Bool = false
     
     let venue: Venue
     let performers: [Performer]
