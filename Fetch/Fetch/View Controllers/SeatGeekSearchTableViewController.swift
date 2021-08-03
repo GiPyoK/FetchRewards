@@ -12,36 +12,57 @@ class SeatGeekSearchTableViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     let eventController = EventController()
+    let sectionHeaders = ["Favorites", "Search Results"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-
         searchBar.delegate = self
         tableView.keyboardDismissMode = .onDrag
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if eventController.events[0].count == 0 && eventController.events[1].count == 0 {
+            eventController.getFavoriteEvents { error in
+                if let error = error {
+                    NSLog(error.localizedDescription)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return eventController.events.count
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return eventController.events.count
+        return eventController.events[section].count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SeatGeekSearchCell", for: indexPath) as? SeatGeekTableViewCell else { return UITableViewCell() }
 
-        cell.event = eventController.events[indexPath.row]
+        cell.event = eventController.events[indexPath.section][indexPath.row]
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionHeaders[section]
     }
     
 
@@ -89,7 +110,8 @@ class SeatGeekSearchTableViewController: UITableViewController {
             if let seatGeekDetailVC = segue.destination as? SeatGeekDetailViewController,
                let indexPath = tableView.indexPathForSelectedRow {
                 seatGeekDetailVC.eventController = eventController
-                seatGeekDetailVC.event = eventController.events[indexPath.row]
+                seatGeekDetailVC.indexPath = indexPath
+                seatGeekDetailVC.event = eventController.events[indexPath.section][indexPath.row]
             }
         }
     }
@@ -113,21 +135,6 @@ extension SeatGeekSearchTableViewController: UISearchBarDelegate {
             }
         }
         searchBar.resignFirstResponder()
-    }
-    
-    func searchBarTextDidEndEditing (_ searchBar: UISearchBar) {
-        guard let searchTerm = searchBar.text else { return }
-        
-        eventController.performEventSearch(with: searchTerm) { error in
-            if let error = error {
-                NSLog(error.localizedDescription)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
