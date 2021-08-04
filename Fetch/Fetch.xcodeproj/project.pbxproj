@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -60,7 +60,6 @@
 				B4D93E585BF42F8DCF5182CB /* Pods-Fetch.debug.xcconfig */,
 				79DEA72DCA87FCD6315F2443 /* Pods-Fetch.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -103,7 +102,7 @@
 				A64E773D26B7CF46007A9F48 /* View Controllers */,
 				A64E773226B3B826007A9F48 /* Views */,
 				A64E773026B3B7C0007A9F48 /* Storyboards */,
-				A64E773E26B89E80007A9F48 /* Helpers.swift */,
+				A64E774026BB23AD007A9F48 /* Helpers */,
 			);
 			path = Fetch;
 			sourceTree = "<group>";
@@ -148,6 +147,14 @@
 				A64E773B26B7CF3B007A9F48 /* SeatGeekDetailViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		A64E774026BB23AD007A9F48 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A64E773E26B89E80007A9F48 /* Helpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

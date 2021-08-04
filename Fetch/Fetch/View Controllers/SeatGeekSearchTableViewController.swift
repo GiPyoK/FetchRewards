@@ -25,9 +25,8 @@ class SeatGeekSearchTableViewController: UITableViewController {
         super.viewWillDisappear(animated)
         
         if eventController.events[0].count == 0 && eventController.events[1].count == 0 {
-            eventController.getFavoriteEvents { error in
+            eventController.performEventSearch(with: "") { error in
                 if error != nil {
-//                    NSLog(error.localizedDescription)
                     return
                 }
                 
