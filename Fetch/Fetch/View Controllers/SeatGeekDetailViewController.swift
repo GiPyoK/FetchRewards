@@ -11,13 +11,15 @@ import AlamofireImage
 
 class SeatGeekDetailViewController: UIViewController {
 
-
+    // MARK: - IBOutlets
     
     @IBOutlet weak var imageSlideShowView: ImageSlideshow!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var venueNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var favoriteBarButton: UIBarButtonItem!
+    
+    // MARK: - Variables
     
     var eventController: EventController? {
         didSet {
@@ -38,6 +40,8 @@ class SeatGeekDetailViewController: UIViewController {
     var didFavoriteChange = false
     let slideShow = ImageSlideshow()
     
+    // MARK: - View functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,6 +58,8 @@ class SeatGeekDetailViewController: UIViewController {
             eventController.updateFavoriteEvent(indexPath: indexPath)
         }
     }
+    
+    // MARK: - Class functions
     
     private func updateViews() {
         guard let event = event,
@@ -106,6 +112,17 @@ class SeatGeekDetailViewController: UIViewController {
         favoriteBarButton.image = eventController.events[indexPath.section][indexPath.row].favorited ? UIImage(named: "star_fill.png") : UIImage(named: "star.png")
     }
     
+    private func toggleFavoriteButton() {
+        guard let eventController = eventController,
+              let indexPath = indexPath  else { return }
+        
+        eventController.events[indexPath.section][indexPath.row].favorited.toggle()
+        favoriteBarButton.image = eventController.events[indexPath.section][indexPath.row].favorited ? UIImage(named: "star_fill.png") : UIImage(named: "star.png")
+        didFavoriteChange.toggle()
+    }
+    
+    // MARK: - IBActions
+    
     @IBAction func favoriteBarButtonTabbed(_ sender: Any) {
         guard let event = event,
               let eventController = eventController else { return }
@@ -120,14 +137,4 @@ class SeatGeekDetailViewController: UIViewController {
             toggleFavoriteButton()
         }
     }
-    
-    private func toggleFavoriteButton() {
-        guard let eventController = eventController,
-              let indexPath = indexPath  else { return }
-        
-        eventController.events[indexPath.section][indexPath.row].favorited.toggle()
-        favoriteBarButton.image = eventController.events[indexPath.section][indexPath.row].favorited ? UIImage(named: "star_fill.png") : UIImage(named: "star.png")
-        didFavoriteChange.toggle()
-    }
-
 }

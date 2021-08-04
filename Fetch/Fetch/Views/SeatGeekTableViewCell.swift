@@ -8,6 +8,8 @@
 import UIKit
 
 class SeatGeekTableViewCell: UITableViewCell {
+    
+    // MARK: - IBOutlets
 
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var title: UILabel!
@@ -15,11 +17,15 @@ class SeatGeekTableViewCell: UITableViewCell {
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var time: UILabel!
     
+    // MARK: - Variables
+    
     var event: Event? {
         didSet {
             updateViews()
         }
     }
+    
+    // MARK: - Class functions
     
     private func updateViews() {
         guard let event = event else { return }
@@ -42,7 +48,7 @@ class SeatGeekTableViewCell: UITableViewCell {
         var output = text.replacingOccurrences(of: "_", with: " ").capitalized
         
         // if the output string is a single word, capitalize the whole word. ex) MLB
-        if !output.contains(" ") {
+        if !output.contains(" ") && output.count <= 3 {
             output = output.uppercased()
         }
         
