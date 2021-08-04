@@ -32,9 +32,21 @@ class SeatGeekTableViewCell: UITableViewCell {
         }
         
         title.text = event.shortTitle
-        type.text = event.type
+        type.text = formatEventType(text: event.type)
         location.text = event.venue.displayLocation
         time.text = Helper.formatDate(date: event.datetimeLocal) ?? event.datetimeLocal
+    }
+    
+    private func formatEventType(text: String) -> String {
+        // replace underscores with spaces and capitalize the first characters
+        var output = text.replacingOccurrences(of: "_", with: " ").capitalized
+        
+        // if the output string is a single word, capitalize the whole word. ex) MLB
+        if !output.contains(" ") {
+            output = output.uppercased()
+        }
+        
+        return output
     }
 
 }
