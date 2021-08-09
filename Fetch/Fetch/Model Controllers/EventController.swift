@@ -15,7 +15,6 @@ class EventController {
     var favorites: [String: Int] = [:] {
         didSet {
             UserDefaults.standard.setValue(favorites, forKey: "favorites")
-            print("UserDefaults set")
         }
     }
     
@@ -104,6 +103,7 @@ class EventController {
             let decoder = JSONDecoder()
             do {
                 var searchResult = try decoder.decode(Events.self, from: data)
+                // turn on the favorite flag for events that are matching in favorites dictionary
                 for index in 0..<searchResult.events.count {
                     let event = searchResult.events[index]
                     if self.favorites["\(event.id)"] != nil {

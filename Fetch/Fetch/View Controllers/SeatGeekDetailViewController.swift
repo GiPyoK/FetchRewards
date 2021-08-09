@@ -38,7 +38,6 @@ class SeatGeekDetailViewController: UIViewController {
     }
     
     var didFavoriteChange = false
-    let slideShow = ImageSlideshow()
     
     // MARK: - View functions
     
@@ -82,7 +81,7 @@ class SeatGeekDetailViewController: UIViewController {
         let pageIndicator = UIPageControl()
         pageIndicator.currentPageIndicatorTintColor = UIColor.lightGray
         pageIndicator.pageIndicatorTintColor = UIColor.black
-        slideShow.pageIndicator = pageIndicator
+        imageSlideShowView.pageIndicator = pageIndicator
 
         imageSlideShowView.activityIndicator = DefaultActivityIndicator()
         imageSlideShowView.setImageInputs(imageSources)
